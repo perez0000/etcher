@@ -65,6 +65,7 @@
         "chai": "4.3.7",
         "css-loader": "5.2.7",
         "electron": "25.8.2",
+        "electron-forge-resource-plugin": "1.0.0-alpha.6",
         "electron-mocha": "^11.0.2",
         "file-loader": "6.2.0",
         "husky": "4.3.8",
@@ -9243,6 +9244,15 @@
       },
       "engines": {
         "node": ">= 12.20.55"
+      }
+    },
+    "node_modules/electron-forge-resource-plugin": {
+      "version": "1.0.0-alpha.6",
+      "resolved": "https://registry.npmjs.org/electron-forge-resource-plugin/-/electron-forge-resource-plugin-1.0.0-alpha.6.tgz",
+      "integrity": "sha512-idkQCDMIX5jfMwTcfKKK6uKasS5WwOwtdsv2CzYi/uAmIgHLGyxCCuZIt0RjLDQe5o9NMr0Cg9misHYu36b8zw==",
+      "dev": true,
+      "dependencies": {
+        "@electron-forge/plugin-base": "^6.0.0"
       }
     },
     "node_modules/electron-installer-common": {
@@ -27165,6 +27175,15 @@
           "resolved": "https://registry.npmjs.org/@types/node/-/node-18.17.12.tgz",
           "integrity": "sha512-d6xjC9fJ/nSnfDeU0AMDsaJyb1iHsqCSOdi84w4u+SlN/UgQdY5tRhpMzaFYsI4mnpvgTivEaQd0yOUhAtOnEQ=="
         }
+      }
+    },
+    "electron-forge-resource-plugin": {
+      "version": "1.0.0-alpha.6",
+      "resolved": "https://registry.npmjs.org/electron-forge-resource-plugin/-/electron-forge-resource-plugin-1.0.0-alpha.6.tgz",
+      "integrity": "sha512-idkQCDMIX5jfMwTcfKKK6uKasS5WwOwtdsv2CzYi/uAmIgHLGyxCCuZIt0RjLDQe5o9NMr0Cg9misHYu36b8zw==",
+      "dev": true,
+      "requires": {
+        "@electron-forge/plugin-base": "^6.0.0"
       }
     },
     "electron-installer-common": {

@@ -14,8 +14,6 @@
     "url": "git@github.com:balena-io/etcher.git"
   },
   "scripts": {
-    "build:rebuild-mountutils": "cd node_modules/mountutils && npm rebuild",
-    "build:sidecar": "npm run build:rebuild-mountutils && tsc --project tsconfig.sidecar.json && pkg build/util/api.js -c pkg-sidecar.json --target node18 --output generated/etcher-util",
     "flowzone-preinstall-linux": "sudo apt-get update && sudo apt-get install -y xvfb libudev-dev && cat < electron-builder.yml | yq e .deb.depends[] - | xargs -L1 echo | sed 's/|//g' | xargs -L1 sudo apt-get --ignore-missing install || true",
     "flowzone-preinstall-macos": "true",
     "flowzone-preinstall-windows": "npx node-gyp install",
@@ -105,6 +103,7 @@
     "chai": "4.3.7",
     "css-loader": "5.2.7",
     "electron": "25.8.2",
+    "electron-forge-resource-plugin": "1.0.0-alpha.6",
     "electron-mocha": "^11.0.2",
     "file-loader": "6.2.0",
     "husky": "4.3.8",

@@ -242,6 +242,23 @@ electron.app.on('before-quit', () => {
 	process.exit(EXIT_CODES.SUCCESS);
 });
 
+// this is replaced at build-time with the path to etcher-util
+declare const ETCHER_UTIL_BIN_PATH: string;
+
+electron.ipcMain.handle('get-util-path', () => {
+	// Workaround the fact that the Resource forge plugin hardcodes
+	// the resource path to `resources` which is only valid on Linux
+	// and Windows builds -- it fails on macOS.
+	//
+	// We also can't just fallback to `process.resourcesPath` because
+	// that will always point to Electron's resource folder, which in
+	// dev builds using the Electron binary from node modules is not
+	// at all what we want, since our build artifacts reside in `/out`.
+	return process.env.NODE_ENV === 'development'
+		? ETCHER_UTIL_BIN_PATH
+		: ETCHER_UTIL_BIN_PATH.replace('resources', process.resourcesPath);
+});
+
 async function main(): Promise<void> {
 	if (!electron.app.requestSingleInstanceLock()) {
 		electron.app.quit();

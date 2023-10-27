@@ -12,7 +12,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "outDir": "build"
+    "outDir": "out/sidecar"
   },
   "include": ["lib/util"]
 }

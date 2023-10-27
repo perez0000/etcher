@@ -7,6 +7,7 @@ import { MakerDMG } from '@electron-forge/maker-dmg';
 import { MakerAppImage } from '@reforged/maker-appimage';
 import { AutoUnpackNativesPlugin } from '@electron-forge/plugin-auto-unpack-natives';
 import { WebpackPlugin } from '@electron-forge/plugin-webpack';
+import { ResourcePlugin } from 'electron-forge-resource-plugin';
 
 import { mainConfig, rendererConfig } from './webpack.config';
 
@@ -30,13 +31,6 @@ const config: ForgeConfig = {
 
     // osxSign: {},
     // osxNotarize: {},
-
-    // One or more files to be copied directly into the app's `Contents/Resources` directory
-    // for macOS target platforms, and the `resources` directory for other target platforms.
-    // The resources directory can be referenced in code via `process.resourcesPath`.
-    extraResource: [
-      // TODO: child writer
-    ],
   },
   rebuildConfig: {},
   makers: [
@@ -152,8 +146,15 @@ const config: ForgeConfig = {
         ],
       },
     }),
+    new ResourcePlugin({
+      env: 'ETCHER_UTIL_BIN_PATH',
+      path: `out/sidecar/bin/etcher-util${process.platform === 'win32' ? '.exe' : ''}`,
+      build: {
+        command: 'npm rebuild mountutils && tsc --project tsconfig.sidecar.json && pkg out/sidecar/util/api.js -c pkg-sidecar.json --target node18 --output out/sidecar/bin/etcher-util',
+        sources: './lib/util/',
+      },
+    }),
   ],
 };
 
 export default config;
-
