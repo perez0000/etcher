@@ -16,6 +16,23 @@ web technologies to ensure flashing an SDCard or USB drive is a pleasant and saf
 experience. It protects you from accidentally writing to your hard-drives, ensures
 every byte of data was written correctly and much more.`;
 
+let osxSigningConfig: any = {};
+let winSigningConfig: any = {};
+
+if (process.env.NODE_ENV === 'production') {
+  osxSigningConfig.osxNotarize = {
+    tool: 'notarytool',
+    appleId: process.env.XCODE_APP_LOADER_EMAIL,
+    appleIdPassword: process.env.XCODE_APP_LOADER_PASSWORD,
+    teamId: process.env.XCODE_APP_LOADER_TEAM_ID,
+  };
+
+  winSigningConfig = {
+    certificateFile: process.env.WINDOWS_SIGNING_CERT_PATH,
+    certificatePassword: process.env.WINDOWS_SIGNING_PASSWORD
+  }
+}
+
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
@@ -28,15 +45,20 @@ const config: ForgeConfig = {
     protocols: [
       { name: 'etcher', schemes: ['etcher']},
     ],
-
-    // osxSign: {},
-    // osxNotarize: {},
+    osxSign: {
+      optionsForFile: () => ({
+        entitlements: './entitlements.mac.plist',
+        hardenedRuntime: true,
+      }),
+    },
+    ...osxSigningConfig,
   },
   rebuildConfig: {},
   makers: [
     new MakerZIP(),
     new MakerSquirrel({
       setupIcon: 'assets/icon.ico',
+      ...winSigningConfig,
     }),
     new MakerDMG({
       background: './assets/dmg/background.tiff',
