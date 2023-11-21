@@ -11,6 +11,8 @@ import { ResourcePlugin } from 'electron-forge-resource-plugin';
 
 import { mainConfig, rendererConfig } from './webpack.config';
 
+const { hostDependencies } = require('./package.json');
+
 const LONG_DESCRIPTION = `balenaEtcher is a powerful OS image flasher built with
 web technologies to ensure flashing an SDCard or USB drive is a pleasant and safe
 experience. It protects you from accidentally writing to your hard-drives, ensures
@@ -109,43 +111,7 @@ const config: ForgeConfig = {
         scripts: {
           postinst: './after-install.tpl',
         },
-        depends: [
-          'gconf-service',
-          'gconf2',
-          'libasound2',
-          'libatk1.0-0',
-          'libc6',
-          'libcairo2',
-          'libcups2',
-          'libdbus-1-3',
-          'libexpat1',
-          'libfontconfig1',
-          'libfreetype6',
-          'libgbm1',
-          'libgcc1',
-          'libgconf-2-4',
-          'libgdk-pixbuf2.0-0',
-          'libglib2.0-0',
-          'libgtk-3-0',
-          'liblzma5',
-          'libnotify4',
-          'libnspr4',
-          'libnss3',
-          'libpango1.0-0 | libpango-1.0-0',
-          'libstdc++6',
-          'libx11-6',
-          'libxcomposite1',
-          'libxcursor1',
-          'libxdamage1',
-          'libxext6',
-          'libxfixes3',
-          'libxi6',
-          'libxrandr2',
-          'libxrender1',
-          'libxss1',
-          'libxtst6',
-          'polkit-1-auth-agent | policykit-1-gnome | polkit-kde-1',
-        ],
+        depends: hostDependencies['debian'],
       }
     }),
   ],
