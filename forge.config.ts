@@ -7,7 +7,7 @@ import { MakerDMG } from '@electron-forge/maker-dmg';
 import { MakerAppImage } from '@reforged/maker-appimage';
 import { AutoUnpackNativesPlugin } from '@electron-forge/plugin-auto-unpack-natives';
 import { WebpackPlugin } from '@electron-forge/plugin-webpack';
-import { ResourcePlugin } from 'electron-forge-resource-plugin';
+// import { ResourcePlugin } from 'electron-forge-resource-plugin';
 
 import { mainConfig, rendererConfig } from './webpack.config';
 
@@ -134,6 +134,7 @@ const config: ForgeConfig = {
         ],
       },
     }),
+    /*
     new ResourcePlugin({
       env: 'ETCHER_UTIL_BIN_PATH',
       path: `out/sidecar/bin/etcher-util${process.platform === 'win32' ? '.exe' : ''}`,
@@ -142,6 +143,7 @@ const config: ForgeConfig = {
         sources: './lib/util/',
       },
     }),
+    */
   ],
 };
 
