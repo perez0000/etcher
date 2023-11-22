@@ -5,6 +5,7 @@ import { MakerDeb } from '@electron-forge/maker-deb';
 import { MakerRpm } from '@electron-forge/maker-rpm';
 import { MakerDMG } from '@electron-forge/maker-dmg';
 import { MakerAppImage } from '@reforged/maker-appimage';
+import MakerPortable from "@rabbitholesyndrome/electron-forge-maker-portable";
 import { AutoUnpackNativesPlugin } from '@electron-forge/plugin-auto-unpack-natives';
 import { WebpackPlugin } from '@electron-forge/plugin-webpack';
 // import { ResourcePlugin } from 'electron-forge-resource-plugin';
@@ -57,6 +58,9 @@ const config: ForgeConfig = {
   },
   rebuildConfig: {},
   makers: [
+    new MakerPortable({
+			...winSigningConfig,
+		}),
     new MakerZIP(),
     new MakerSquirrel({
       setupIcon: 'assets/icon.ico',
